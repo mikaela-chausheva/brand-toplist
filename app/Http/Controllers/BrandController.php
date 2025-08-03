@@ -15,15 +15,12 @@ class BrandController extends Controller
     {
         $country = $request->header('CF-IPCountry', null);
 
-        if ($country) {
-            $brands = Brand::where('country_code', $country)->get();
+        $brands = Brand::where('country_code', $country)->get();
 
-            if ($brands->isEmpty()) {
-                $brands = Brand::whereNull('country_code')->get();
-            }
-        } else {
+        if ($brands->isEmpty()) {
             $brands = Brand::whereNull('country_code')->get();
-    }
+        }
+
     return view('index', compact('brands'));
     }
 
@@ -45,12 +42,12 @@ class BrandController extends Controller
             'brand_name' => 'required|string|max:255',
             'brand_image' => 'required|url',
             'rating' => 'required|integer|min:1|max:5',
-            'country_code' => 'nullable|string|size:2',
         ]);
 
 
-        $validated['country_code'] = $request->header('CF-IPCountry', null);
+        $countryCode = $request->header('CF-IPCountry', null);
 
+        $validated['country_code'] = $countryCode;
 
         $brand = Brand::create($validated);
 

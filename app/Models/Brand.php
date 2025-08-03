@@ -15,7 +15,7 @@ class Brand extends Model
         'brand_name',
         'brand_image',
         'rating',
-        'coutry_code'
+        'country_code'
     ];
 
 }
