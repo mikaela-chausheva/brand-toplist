@@ -10,9 +10,20 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $country = $request->header('CF-IPCountry', null);
+
+        if ($country) {
+            $brands = Brand::where('country_code', $country)->get();
+
+            if ($brands->isEmpty()) {
+                $brands = Brand::whereNull('country_code')->get();
+            }
+        } else {
+            $brands = Brand::whereNull('country_code')->get();
+    }
+    return view('index', compact('brands'));
     }
 
     /**
@@ -20,15 +31,33 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
+    // API - tested in Postman
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'brand_name' => 'required|string|max:255',
+            'brand_image' => 'required|url',
+            'rating' => 'required|integer|min:1|max:5',
+            'country_code' => 'nullable|string|size:2',
+        ]);
+
+
+        $validated['country_code'] = $request->header('CF-IPCountry', null);
+
+
+        $brand = Brand::create($validated);
+
+        return response()->json([
+            'message' => 'Brand created successfully',
+            'brand' => $brand
+        ], 201);
+
     }
 
     /**
