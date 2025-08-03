@@ -12,4 +12,5 @@ Route::get('/test', function(){
 Route::post('/brands', [BrandController::class, 'store']);
 // UPDATE
 Route::put('/brands/{id}', [BrandController::class, 'update']);
-
+// DELETE
+Route::delete('/brands/{id}', [BrandController::class, 'destroy']);
