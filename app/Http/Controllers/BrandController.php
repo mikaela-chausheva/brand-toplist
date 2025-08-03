@@ -85,10 +85,9 @@ class BrandController extends Controller
             'brand_name' => 'required|string|max:255',
             'brand_image' => 'required|url',
             'rating' => 'required|integer|min:1|max:5',
-            'country_code' => 'sometimes|nullable|string|size:2',
         ]);
 
-        // $validated['country_code'] = $request->header('CF-IPCountry', null);
+        $validated['country_code'] = $request->header('CF-IPCountry', null);
 
         $brand = Brand::find($id);
         if (!$brand) {
