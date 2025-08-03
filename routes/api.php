@@ -8,5 +8,8 @@ Route::get('/test', function(){
     return ['message' => 'API works'];
 }) ;
 
-
+// CREATE
 Route::post('/brands', [BrandController::class, 'store']);
+// UPDATE
+Route::put('/brands/{id}', [BrandController::class, 'update']);
+

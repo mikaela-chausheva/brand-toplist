@@ -10,6 +10,7 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // VIEW - http://localhost:8000/brands
     public function index(Request $request)
     {
         $country = $request->header('CF-IPCountry', null);
@@ -71,17 +72,38 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+
     public function edit(Brand $brand)
     {
-        //
+
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Brand $brand)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'brand_name' => 'required|string|max:255',
+            'brand_image' => 'required|url',
+            'rating' => 'required|integer|min:1|max:5',
+            'country_code' => 'sometimes|nullable|string|size:2',
+        ]);
+
+        // $validated['country_code'] = $request->header('CF-IPCountry', null);
+
+        $brand = Brand::find($id);
+        if (!$brand) {
+            return response()->json(['error' => 'Brand not found'], 404);
+        }
+
+        $brand->update($validated);
+
+        return response()->json([
+            'message' => 'Brand edited successfully',
+            'brand' => $brand
+        ], 200);
     }
 
     /**
