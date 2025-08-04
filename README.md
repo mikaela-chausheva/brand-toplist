@@ -24,7 +24,7 @@ the system includes a RESTful APIs and a mobile-friendly frondend built with HTM
 
 1. Clone the repository
 ```
-    git clone https://github.com/your-username/brand-toplist.git
+    git clone https://github.com/mikaela-chausheva/brand-toplist.git
     cd brand-toplist
     composer install
 ```
