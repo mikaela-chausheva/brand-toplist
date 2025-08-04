@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 // SHow all brands
-Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
+Route::get('/', [BrandController::class, 'index'])->name('brands.index');

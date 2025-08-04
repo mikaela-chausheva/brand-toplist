@@ -31,7 +31,7 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $brand->brand_name }}</td>
-                        <td><img src="{{ $brand->brand_image }}" alt="Logo"></td>
+                        <td><img src="{{ $brand->brand_image }}" width="30px" height="30px" alt="Logo"></td>
                         <td>{{ $brand->rating }}/5</td>
                     </tr>
                 @endforeach
@@ -40,10 +40,5 @@
     @endif
   </div>
 
-  <script src="js/app.js"></script>
-
-
-
 </body>
 </html>
-

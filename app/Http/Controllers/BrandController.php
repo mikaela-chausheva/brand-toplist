@@ -7,10 +7,8 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    // VIEW - http://localhost:8000/brands
+    // VIEW - http://localhost:8000
+
     public function index(Request $request)
     {
         $country = $request->header('CF-IPCountry', null);
@@ -24,18 +22,7 @@ class BrandController extends Controller
     return view('index', compact('brands'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    // API - tested in Postman
+    // API - http://localhost:8000/api/brands
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -57,28 +44,7 @@ class BrandController extends Controller
         ], 201);
 
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Brand $brand)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-
-    public function edit(Brand $brand)
-    {
-
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+      // RESTful API - http://localhost:8000/api/brands/$id
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
@@ -102,9 +68,7 @@ class BrandController extends Controller
         ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+      // RESTful API - http://localhost:8000/api/brands/$id
     public function destroy($id)
     {
         $brand = Brand::find($id);
